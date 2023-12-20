@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 import csv
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import patches
 import tkinter.filedialog
 import os
 import pathlib
 
+# 使用する講義データが変わる場合は116行目と121行目のパスを合わせて変更してください。
+
 filetypes = [("CSV (コンマ区切り)", "*.csv")]
-data_pass = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="ファイルをひらく")
-filename = data_pass.split("/")[-1].split(".csv")[0].split("_")
+data_path = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="ファイルをひらく")
+filename = data_path.split("/")[-1].split(".csv")[0].split("_")
 
 
-with open(data_pass, "r", encoding="utf-8") as csvfile:
+with open(data_path, "r", encoding="utf-8") as csvfile:
     f = csv.DictReader(csvfile, delimiter=",", doublequote=True, lineterminator="\r\n", 
                    quotechar='"', skipinitialspace=True)
 
@@ -49,15 +53,14 @@ with open(data_pass, "r", encoding="utf-8") as csvfile:
 
     all_num -= 1 # savenote を除外
 
-    print("アクティブ度:" + str(active_num)) # move-drawing の数
-    print("アクティブ度 2:" + str(active_num2/all_num)) # start-drawingとmove-drawing の全体に占める割合
+    print("-----------------------------------------------------------------------")
     print("消しゴム使用回数:" + str(eraser_num))
     print("全消去回数:" + str(allclear_num))
 
 pen_box = [[] for i in range(pen_num)]
 eraser_box = [[] for i in range(eraser_num)]
 
-with open(data_pass, "r", encoding="utf-8") as csvfile:
+with open(data_path, "r", encoding="utf-8") as csvfile:
     f = csv.DictReader(csvfile, delimiter=",", doublequote=True, lineterminator="\r\n", quotechar='"', skipinitialspace=True)
 
     mode = 1 # 全消去:0, ペン:1, 消しゴム:2
@@ -108,32 +111,67 @@ with open(data_pass, "r", encoding="utf-8") as csvfile:
     m = (sec % 3600 ) // 60
     s = sec % 60
     print("所要時間:{0}日{1}時間{2}分{3}秒".format(d, h, m, s))
-    print("画像の保存先は作成済みですか？: Y/n")
-    new = input()
-    path = 0
-    path_dir = ""
+    print("-----------------------------------------------------------------------")
+    print("読み込んだファイル:{}".format(data_path.split("/")[-1].split(".csv")[0]))
+    new_dir_path = './result/math2022/Q{}/q{}/S{}'.format(filename[0], filename[1], filename[2])
+    try:
+        os.makedirs(new_dir_path)
+    except FileExistsError:
+        pass
+    path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\math2022\Q{}\q{}\S{}".format(filename[0], filename[1], filename[2]))
+    
+    # print("読み込み中のファイル:{}".format(data_pass.split("/")[-1].split(".csv")[0]))
+    # print("画像の保存先は作成済みですか？: Y/n")
+    # new = input()
+    # path = 0
+    # path_dir = ""
         
-    while path == 0:
-        if (new == "y") or (new == "Y"):
-            path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\Q{}\q{}\S{}".format(filename[0], filename[1], filename[2]))
-            path = 1
-        elif (new == "n") or (new == "N"):
-            print("保存先を以下のように指定して下さい。ただし、数値のみを入力して下さい。")
-            print("(課題番号).(問番号).(解答者番号)")
-            id = input()
-            Q = "Q" + id.split(".")[0]
-            q = "q" + id.split(".")[1]
-            S = "S" + id.split(".")[2]
-            new_dir_path = './result/{}/{}/{}'.format(Q, q, S)
-            try:
-                os.makedirs(new_dir_path)
-            except FileExistsError:
-                print("保存先が作成済みです")
-            path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\{}\{}\{}".format(Q, q, S))
-            path = 1
-        else:
-            print("解答形式が正しくありません。打ち直して下さい。")
-            new = input()
+    # while path == 0:
+    #     if (new == "y") or (new == "Y"):
+    #         path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\Q{}\q{}\S{}".format(filename[0], filename[1], filename[2]))
+    #         path = 1
+    #     elif (new == "n") or (new == "N"):
+    #         print("-----------------------------------------------------------------------")
+    #         print("新規保存先を作成します。")
+    #         new_dir_path = './result/Q{}/q{}/S{}'.format(filename[0], filename[1], filename[2])
+    #         try:
+    #             os.makedirs(new_dir_path)
+    #         except FileExistsError:
+    #             print("-----------------------------------------------------------------------")
+    #             print("保存先が作成済みです")
+    #         path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\Q{}\q{}\S{}".format(filename[0], filename[1], filename[2]))
+    #         path = 1
+            
+        #     print("保存先を以下のように指定して下さい。ただし、int型で入力して下さい。")
+        #     print("(課題番号).(問番号).(解答者番号)")
+        #     id = input()
+        #     if len(id.split(".")) != 3:
+        #         print("-----------------------------------------------------------------------")
+        #         print("保存先の指定が正しくありません。")
+        #         continue
+        #     elif "" in id.split("."):
+        #         print("-----------------------------------------------------------------------")
+        #         print("空文字は認められません。")
+        #         continue
+        #     elif (type(int(id.split(".")[0])) != int) or (type(int(id.split(".")[1])) != int) or (type(int(id.split(".")[2])) != int):
+        #         print("-----------------------------------------------------------------------")
+        #         print("int型以外が含まれています。")
+        #     else:
+        #         Q = "Q" + id.split(".")[0]
+        #         q = "q" + id.split(".")[1]
+        #         S = "S" + id.split(".")[2]
+        #         new_dir_path = './result/{}/{}/{}'.format(Q, q, S)
+        #         try:
+        #             os.makedirs(new_dir_path)
+        #         except FileExistsError:
+        #             print("-----------------------------------------------------------------------")
+        #             print("保存先が作成済みです")
+        #         path_dir = pathlib.Path(r"C:\Users\user\OneDrive\デスクトップ\research\result\{}\{}\{}".format(Q, q, S))
+        #         path = 1
+        # else:
+        #     print("-----------------------------------------------------------------------")
+        #     print("解答形式が正しくありません。打ち直して下さい。")
+        #     new = input()
 
 def before():
     target = 0
@@ -236,7 +274,7 @@ def after():
     target = 0
     while target < len(eraser_box):
         fig, ax = plt.subplots()
-        plt.rcParams["figure.figsize"] = [6.0,7.0] # グラフのサイズ調整
+        # plt.rcParams["figure.figsize"] = [6.0,7.0] # グラフのサイズ調整
     
         ax.set_xlim(0, 750)
         ax.set_ylim(0, 1000)
