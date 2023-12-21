@@ -71,7 +71,7 @@ def process_actions_v2(data):
 
     return images
 
-# 改訂版のアクション処理を実行（allclearを含む）
+# アクション処理を実行
 images_v2 = process_actions_v2(data)
 
 # 生成された画像をファイルとして保存し、リンクを生成する
