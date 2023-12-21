@@ -11,7 +11,7 @@ data_path = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="フ�
 # CSVファイルを読み込む
 data = pd.read_csv(data_path)
 
-def process_actions_v4(data, seed=0):
+def process_actions_v2(data, seed=0):
     random.seed(seed)
 
     used_colors = [('#000000', 0)]  # 初期セッションは黒色 (#000000)
@@ -91,10 +91,10 @@ def process_actions_v4(data, seed=0):
 
     return images
 
-images_v4 = process_actions_v4(data)
+images_v2 = process_actions_v2(data)
 
-image_paths_v4 = []
-for i, img in enumerate(images_v4):
-    image_path_v4 = rf"C:PATH\drawing_image_v4_{i+1}.png"
-    img.save(image_path_v4)
-    image_paths_v4.append(image_path_v4)
+image_paths_v2 = []
+for i, img in enumerate(images_v2):
+    image_path_v2 = rf"C:\Users\user\OneDrive\デスクトップ\research\drawing_image_v4_{i+1}.png"
+    img.save(image_path_v2)
+    image_paths_v2.append(image_path_v2)
