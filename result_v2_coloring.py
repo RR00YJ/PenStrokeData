@@ -93,8 +93,12 @@ def process_actions_v2(data, seed=0):
 
 images_v2 = process_actions_v2(data)
 
+# 生成された画像をファイルとして保存し、リンクを生成する
 image_paths_v2 = []
 for i, img in enumerate(images_v2):
-    image_path_v2 = rf"C:\Users\user\OneDrive\デスクトップ\research\drawing_image_v4_{i+1}.png"
+    # 画像ファイルのパス
+    # PATHに適切な保存先を与える
+    image_path_v2 = rf"C:PATH\drawing_image_v4_{i+1}.png"
+    # 画像を保存
     img.save(image_path_v2)
     image_paths_v2.append(image_path_v2)
