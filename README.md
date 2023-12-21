@@ -7,4 +7,4 @@
 <p>・result_v2.py is a partially modified version of result.py.</p>
 
 <h1>Warning</h1>
-<p>・Replace line 118 in code with the path you want to save the images(result.py)</p>
+<p>・Replace line 116 in code with the path you want to save the images(result.py)</p>
