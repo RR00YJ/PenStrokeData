@@ -10,7 +10,7 @@ data_path = tkinter.filedialog.askopenfilename(filetypes=filetypes, title="フ�
 # CSVファイルを読み込む
 data = pd.read_csv(data_path)
 
-def process_actions_v3(data):
+def process_actions_v2(data):
     # 画像の初期化（白背景）
     img = Image.new('RGB', (800, 1000), 'white')
     draw = ImageDraw.Draw(img)
@@ -72,14 +72,14 @@ def process_actions_v3(data):
     return images
 
 # 改訂版のアクション処理を実行（allclearを含む）
-images_v3 = process_actions_v3(data)
+images_v2 = process_actions_v2(data)
 
 # 生成された画像をファイルとして保存し、リンクを生成する
-image_paths_v3 = []
-for i, img in enumerate(images_v3):
+image_paths_v2 = []
+for i, img in enumerate(images_v2):
     # 画像ファイルのパス
-    # PATHの部分を変更し、適切なパスを指定
-    image_path_v3 = rf"C:PATH\drawing_image_v3_{i+1}.png"
+    # PATHに適切な保存先を与える
+    image_path_v2 = rf"C:PATH\drawing_image_v3_{i+1}.png"
     # 画像を保存
-    img.save(image_path_v3)
-    image_paths_v3.append(image_path_v3)
+    img.save(image_path_v2)
+    image_paths_v2.append(image_path_v2)
