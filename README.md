@@ -1,5 +1,5 @@
 # PenStrokeData
-<p>This code visualizes how learners arrived at their final answers. By analyzing the output images, you will be able to see where your learners stumbled and give them appropriate feedback</p>
+<p>This code visualizes how learners came up with their final answers. By analyzing the output images, you will be able to see where your learners stumbled and give them appropriate feedback</p>
 
 <h1>Requirements</h1>
 <p>・"Action", "X", "Y", "Time" column is required in your csvfile which contains pen stroke data</p>
