@@ -91,6 +91,7 @@ def process_actions_v2(data, seed=0):
 
     return images
 
+# アクション処理を実行
 images_v2 = process_actions_v2(data)
 
 # 生成された画像をファイルとして保存し、リンクを生成する
