@@ -3,7 +3,7 @@
 
 <h1>Requirements</h1>
 <p>・"Action", "X", "Y", "Time" column is required in your csvfile which contains pen stroke data</p>
-<p>・By default, the save name for csv data is (question number)_(subquestion number)_(learner number).csv(result.py)</p>
+<p>・By default, the save name for csv data is (question number)_(subquestion number)_(student id).csv(result.py)</p>
 <p>・result_v2.py is a partially modified version of result.py.</p>
 <p>・result_v2_coloring.py is a revised version of result_v2.py that adds coloring processing.</p>
 
